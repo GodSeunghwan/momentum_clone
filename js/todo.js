@@ -5,6 +5,14 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 const TODOS_LS = 'toDos';
 let toDos = [];
 
+function validationCheck(value) {
+    if (value !== null && value !== undefined && value !== "" && value.substr(0, 1) !== " ") {
+        return true;
+    } else {
+        false;
+    }
+}
+
 function deleteTodo(event) {
     const btn = event.target;
     const li = btn.parentNode;
@@ -43,7 +51,11 @@ function paintToDo(text) {
 function handleSubmit(event) {
     event.preventDefault();
     const currentValue = toDoInput.value;
-    paintToDo(currentValue);
+    if (validationCheck(currentValue)) {
+        paintToDo(currentValue);
+    } else {
+        alert("Please write a to do!");
+    }
     toDoInput.value = "";
 }
 

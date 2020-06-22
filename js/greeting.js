@@ -5,6 +5,14 @@ const form = document.querySelector(".js-form"),
 const USER_LS = "currentUser",
     SHOWING_CN = "showing";
 
+function validationCheck(value) {
+    if (value !== null && value !== undefined && value !== "" && value.substr(0, 1) !== " ") {
+        return true;
+    } else {
+        false;
+    }
+}
+
 function saveName(text) {
     localStorage.setItem(USER_LS, text);
 }
@@ -12,8 +20,13 @@ function saveName(text) {
 function handleSubmit(event) {
     event.preventDefault();
     const currentValue = input.value;
-    paintGreeting(currentValue);
-    saveName(currentValue);
+    if (validationCheck(currentValue)) {
+        paintGreeting(currentValue);
+        saveName(currentValue);
+    } else {
+        alert("What is your name?");
+    }
+    input.value = "";
 }
 
 function askForName() {
